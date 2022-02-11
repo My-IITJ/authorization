@@ -12,3 +12,7 @@ class MyTokenObtainPairSerializer(TokenObtainPairSerializer):
         token['username'] = user.username
         return token
 
+class UserSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = UserRole
+        fields = ['role', 'user', 'verification_status']
