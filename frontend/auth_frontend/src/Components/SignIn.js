@@ -3,24 +3,17 @@ import React, { Component } from "react";
 export default class SignIn extends Component {
     render() {
         return (
-            <form>
+            <form action='http://127.0.0.1:8000/api/signin/' method='post'>
                 <h3>Sign In</h3>
 
                 <div className="form-group">
-                    <label>Email address</label>
-                    <input type="email" className="form-control" placeholder="Enter email" />
+                    <label>Username</label>
+                    <input type="text" className="form-control" placeholder="Enter username" name='username' />
                 </div>
 
                 <div className="form-group">
                     <label>Password</label>
-                    <input type="password" className="form-control" placeholder="Enter password" />
-                </div>
-
-                <div className="form-group">
-                    <div className="custom-control custom-checkbox">
-                        <input type="checkbox" className="custom-control-input" id="customCheck1" />
-                        <label className="custom-control-label" htmlFor="customCheck1">Remember me</label>
-                    </div>
+                    <input type="password" className="form-control" placeholder="Enter password" name='password'/>
                 </div>
 
                 <button type="submit" className="btn btn-primary btn-block">Submit</button>

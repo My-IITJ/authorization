@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 
 export default class SignUp extends Component {
+
     render() {
         return (
             <form action='http://127.0.0.1:8000/api/signup/' method='post'>
@@ -31,7 +32,7 @@ export default class SignUp extends Component {
                     <input type="password" className="form-control" placeholder="Enter password" name='password'/>
                 </div>
 
-                <button type="submit" className="btn btn-primary btn-block">Sign Up</button>
+                <button type="submit" className="btn btn-primary btn-block" >Sign Up</button>
                 <p className="forgot-password text-right">
                     Already registered <a href="#">sign in?</a>
                 </p>
