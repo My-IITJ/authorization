@@ -1,5 +1,5 @@
 from auth.serializers import *
-from auth.views import UserViewSet, signup, signin
+from auth.views import UserViewSet, signup, signin, signout
 from rest_framework.routers import DefaultRouter
 from django.urls import path, include
 from rest_framework_simplejwt.views import (
@@ -17,5 +17,6 @@ urlpatterns = [
     path('token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
     path('', include(router.urls)),
     path('signup/', signup),
-    path('signin/',signin)
+    path('signin/',signin),
+    path('signout/',signout)
 ]
