@@ -33,13 +33,24 @@ ALLOWED_HOSTS = config('ALLOWED_HOSTS', cast=lambda v: [
 # Application definition
 
 INSTALLED_APPS = [
+    'rest_framework',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'users',
 ]
+
+REST_FRAMEWORK = {
+    'DEFAULT_FILTER_BACKENDS': [
+        'django_filters.rest_framework.DjangoFilterBackend'
+    ],
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+        'rest_framework_simplejwt.authentication.JWTAuthentication',
+    ],
+}
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -113,6 +124,7 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+AUTH_USER_MODEL ='users.CustomUser'
 
 # Internationalization
 # https://docs.djangoproject.com/en/3.0/topics/i18n/
