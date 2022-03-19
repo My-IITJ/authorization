@@ -10,7 +10,7 @@ from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from django.contrib.auth import authenticate, login, logout
 from rest_framework.generics import GenericAPIView
-from .register import UserRegister
+from .serializers import UserRegister
 from rest_framework import status
 
 class RegisterView(GenericAPIView):
