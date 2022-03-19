@@ -2,6 +2,7 @@ import email
 from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
 from rest_framework import serializers
 from users.models import CustomUser
+from users.models import UserRole
 from django.contrib.auth.hashers import make_password
 class MyTokenObtainPairSerializer(TokenObtainPairSerializer):
 
@@ -21,3 +22,16 @@ class UserSerializer(serializers.ModelSerializer):
         validated_data['password'] = make_password(validated_data['password'])
         user = CustomUser.objects.create(**validated_data)
         return user
+
+class UserRegister(serializers.ModelSerializer):
+
+    email = serializers.EmailField(max_length=255, min_length=4),
+    role = serializers.CharField(max_length=255, min_length=2)
+
+    class Meta:
+        model = UserRole
+        fields = ['email', 'role'
+                  ]
+
+    def create(self, validated_data):
+        return UserRole.objects.create_user(**validated_data)

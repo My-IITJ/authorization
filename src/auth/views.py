@@ -9,6 +9,17 @@ from rest_framework_simplejwt.views import TokenObtainPairView
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from django.contrib.auth import authenticate, login, logout
+from rest_framework.generics import GenericAPIView
+from .serializers import UserRegister
+from rest_framework import status
+
+class RegisterView(GenericAPIView):
+    serializer_class = UserRegister
+
+    def post(self, request):
+        serializer = UserRegister(data=request.data)
+        serializer.save()
+        return Response(serializer.data, status=status.HTTP_201_CREATED)
 
 class MyObtainTokenPairView(TokenObtainPairView):
     permission_classes = (AllowAny,)
