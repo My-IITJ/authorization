@@ -27,8 +27,8 @@ SECRET_KEY = config('SECRET_KEY', cast=str)
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = config('DEBUG', default=False, cast=bool)
 
-BASE_BACKEND_URL = str('http://localhost:8000')
-BASE_FRONTEND_URL = str('http://localhost:3000')
+BASE_BACKEND_URL = str('BASE_BACKEND_URL')
+BASE_FRONTEND_URL = str('BASE_FRONTEND_URL')
 
 ALLOWED_HOSTS = config('ALLOWED_HOSTS', cast=lambda v: [
                        s.strip() for s in v.split(',')])
@@ -177,5 +177,5 @@ CORS_ORIGIN_WHITELIST = [BASE_FRONTEND_URL]
 
 
 # Google OAuth2 settings
-GOOGLE_OAUTH2_CLIENT_ID = str('337583749605-p357e75lijvd126qar2g8gm4blpvhmjs.apps.googleusercontent.com')
-GOOGLE_OAUTH2_CLIENT_SECRET = str('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')
+GOOGLE_OAUTH2_CLIENT_ID = str('GOOGLE_OAUTH2_CLIENT_ID')
+GOOGLE_OAUTH2_CLIENT_SECRET = str('GOOGLE_OAUTH2_CLIENT_SECRET')
