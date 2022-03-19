@@ -3,6 +3,8 @@ from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
 from rest_framework import serializers
 from users.models import CustomUser
 from django.contrib.auth.hashers import make_password
+
+
 class MyTokenObtainPairSerializer(TokenObtainPairSerializer):
 
     @classmethod
@@ -10,6 +12,7 @@ class MyTokenObtainPairSerializer(TokenObtainPairSerializer):
         token = super(MyTokenObtainPairSerializer, cls).get_token(user)
         token['username'] = user.username
         return token
+
 
 class UserSerializer(serializers.ModelSerializer):
     password = serializers.CharField(write_only=True,style={'input_type': 'password'})
