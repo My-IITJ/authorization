@@ -8,6 +8,10 @@ django-decouple = "*"
 psycopg2-binary = "*"
 django = "==3.2.9"
 djangorestframework = "*"
+django-cors-headers = "*"
+django-extensions = "*"
+djangorestframework-jwt = "*"
+requests = "*"
 
 [dev-packages]
 

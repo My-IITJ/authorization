@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/3.0/ref/settings/
 """
 
 import os
+import datetime
 from decouple import config
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
@@ -26,6 +27,9 @@ SECRET_KEY = config('SECRET_KEY', cast=str)
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = config('DEBUG', default=False, cast=bool)
 
+BASE_BACKEND_URL = str('BASE_BACKEND_URL')
+BASE_FRONTEND_URL = str('BASE_FRONTEND_URL')
+
 ALLOWED_HOSTS = config('ALLOWED_HOSTS', cast=lambda v: [
                        s.strip() for s in v.split(',')])
 
@@ -40,7 +44,14 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'authapp',
     'users',
+
+    'corsheaders',
+    'django_extensions',
+    'rest_framework.authtoken',
+
+    'rest_framework_jwt',
 ]
 
 REST_FRAMEWORK = {
@@ -55,6 +66,7 @@ REST_FRAMEWORK = {
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
@@ -144,3 +156,26 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.0/howto/static-files/
 
 STATIC_URL = '/static/'
+
+# JWT settings
+JWT_EXPIRATION_DELTA_DEFAULT = 2.628e+6  # 1 month in seconds
+JWT_AUTH = {
+    'JWT_EXPIRATION_DELTA': datetime.timedelta(
+        seconds=int(JWT_EXPIRATION_DELTA_DEFAULT)
+    ),
+    'JWT_AUTH_HEADER_PREFIX': 'JWT',
+    'JWT_GET_USER_SECRET_KEY': lambda user: user.secret_key,
+    'JWT_RESPONSE_PAYLOAD_HANDLER': 'users.selectors.jwt_response_payload_handler',
+    'JWT_AUTH_COOKIE': 'jwt_token',
+    'JWT_AUTH_COOKIE_SAMESITE': 'None'
+}
+
+
+# CORS settings
+CORS_ALLOW_CREDENTIALS = True
+CORS_ORIGIN_WHITELIST = [BASE_FRONTEND_URL]
+
+
+# Google OAuth2 settings
+GOOGLE_OAUTH2_CLIENT_ID = str('GOOGLE_OAUTH2_CLIENT_ID')
+GOOGLE_OAUTH2_CLIENT_SECRET = str('GOOGLE_OAUTH2_CLIENT_SECRET')
